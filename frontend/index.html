@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Exam Monitoring System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>AI Exam Monitor</h1>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-eye"></i>
+                        <span id="monitoringStatus">Offline</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span id="alertCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Video Section -->
+            <section class="video-section">
+                <div class="video-container">
+                    <video id="videoElement" autoplay muted playsinline></video>
+                    <canvas id="overlayCanvas"></canvas>
+                    <div class="video-overlay" id="videoOverlay">
+                        <div class="pose-indicator" id="poseIndicator">
+                            <i class="fas fa-user"></i>
+                            <span>Looking Forward</span>
+                        </div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                            <span class="confidence-text" id="confidenceText">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="video-controls">
+                    <button id="startBtn" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        Start Monitoring
+                    </button>
+                    <button id="stopBtn" class="btn btn-danger" disabled>
+                        <i class="fas fa-stop"></i>
+                        Stop Monitoring
+                    </button>
+                    <button id="settingsBtn" class="btn btn-secondary">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                </div>
+            </section>
+
+            <!-- Dashboard -->
+            <section class="dashboard">
+                <div class="dashboard-grid">
+                    <!-- Real-time Stats -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Real-time Statistics</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="stat-grid">
+                                <div class="stat-box">
+                                    <div class="stat-value" id="totalViolations">0</div>
+                                    <div class="stat-label">Total Violations</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="currentPose">Forward</div>
+                                    <div class="stat-label">Current Pose</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="sessionTime">00:00:00</div>
+                                    <div class="stat-label">Session Time</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-value" id="confidence">0%</div>
+                                    <div class="stat-label">Confidence</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pose History -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-history"></i> Pose History</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="pose-timeline" id="poseTimeline">
+                                <!-- Pose history items will be added here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alerts Panel -->
+                    <div class="card alerts-panel">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bell"></i> Alerts & Warnings</h3>
+                            <button id="clearAlertsBtn" class="btn btn-sm btn-outline">Clear All</button>
+                        </div>
+                        <div class="card-content">
+                            <div class="alerts-container" id="alertsContainer">
+                                <div class="no-alerts">
+                                    <i class="fas fa-check-circle"></i>
+                                    <p>No alerts at this time</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Panel -->
+                    <div class="card settings-panel" id="settingsPanel" style="display: none;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-cog"></i> Settings</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="setting-group">
+                                <label for="sensitivitySlider">Detection Sensitivity</label>
+                                <input type="range" id="sensitivitySlider" min="0.1" max="1.0" step="0.1" value="0.6">
+                                <span id="sensitivityValue">60%</span>
+                            </div>
+                            <div class="setting-group">
+                                <label for="warningThreshold">Warning Threshold (seconds)</label>
+                                <input type="number" id="warningThreshold" min="1" max="30" value="3">
+                            </div>
+                            <div class="setting-group">
+                                <label for="alertThreshold">Alert Threshold (seconds)</label>
+                                <input type="number" id="alertThreshold" min="1" max="60" value="5">
+                            </div>
+                            <div class="setting-group">
+                                <label>
+                                    <input type="checkbox" id="soundEnabled" checked>
+                                    Enable Sound Alerts
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label>
+                                    <input type="checkbox" id="notificationsEnabled" checked>
+                                    Enable Browser Notifications
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 AI Exam Monitoring System. Powered by TensorFlow.js</p>
+                <div class="footer-links">
+                    <a href="#" id="helpBtn">Help</a>
+                    <a href="#" id="aboutBtn">About</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal for Help -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Help & Instructions</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>How to Use the System</h3>
+                <ol>
+                    <li>Click "Start Monitoring" to begin the exam session</li>
+                    <li>Position yourself in front of the camera</li>
+                    <li>Keep your head facing forward for optimal monitoring</li>
+                    <li>The system will detect and alert on suspicious behavior</li>
+                    <li>Use the settings panel to adjust sensitivity</li>
+                </ol>
+                
+                <h3>Pose Detection</h3>
+                <ul>
+                    <li><strong>Forward:</strong> Normal exam position</li>
+                    <li><strong>Left/Right:</strong> Looking away from screen</li>
+                    <li><strong>Up/Down:</strong> Looking up or down</li>
+                </ul>
+                
+                <h3>Alert Types</h3>
+                <ul>
+                    <li><strong>Warning:</strong> Brief pose deviation</li>
+                    <li><strong>Alert:</strong> Sustained suspicious behavior</li>
+                    <li><strong>Critical:</strong> Multiple violations detected</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading AI Model...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

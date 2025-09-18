@@ -1,0 +1,17 @@
+{
+  "model_type": "mobilenet",
+  "classes": [
+    "down",
+    "forward",
+    "left",
+    "right",
+    "up"
+  ],
+  "num_classes": 5,
+  "img_size": 160,
+  "training_samples": 12762,
+  "validation_samples": 2916,
+  "final_accuracy": 0.6460905075073242,
+  "best_accuracy": 0.6488339900970459,
+  "epochs_trained": 11
+}

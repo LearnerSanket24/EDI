@@ -1,0 +1,35 @@
+# Integration Instructions
+
+## Files Created:
+1. `..\backend\models\crowdhuman_custom.pt` - Trained CrowdHuman model
+2. `integration/multi_person_custom.py` - Updated detection module
+
+## Integration Steps:
+
+### Step 1: Update the detection module
+Replace the contents of `detections/multi_person_yolov8.py` with the contents of `integration/multi_person_custom.py`
+
+Or create a new file `detections/multi_person_custom.py` and update `detections/multi_person.py` to import from it.
+
+### Step 2: Test the integration
+Run your Flask app and test the `/api/detections/multi_person` endpoint with sample images.
+
+### Step 3: Verify model loading
+Check the `/api/debug/model` endpoint to see model status.
+
+## Model Information:
+- Base model: yolov8n
+- Training epochs: 30
+- Image size: 320
+- Optimized for: CPU-only inference
+- Classes: person (class 0)
+
+## Expected Performance:
+- Single person images: num_people=1, violation=False
+- Crowd images: num_people>1, violation=True
+- Better accuracy on CrowdHuman-style images compared to generic YOLO
+
+## Troubleshooting:
+- If custom model fails to load, system automatically falls back to YOLOv8n
+- Check console output for model loading messages
+- Verify model file exists at: ..\backend\models\crowdhuman_custom.pt

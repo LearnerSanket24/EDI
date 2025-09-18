@@ -1,0 +1,19 @@
+CrowdHuman Lightweight Dataset Statistics
+==================================================
+
+TRAIN Split:
+  Images: 800
+  Label files: 800
+  Total bounding boxes: 1417
+  Average boxes per image: 1.77
+
+VAL Split:
+  Images: 200
+  Label files: 200
+  Total bounding boxes: 352
+  Average boxes per image: 1.76
+
+TOTAL:
+  Images: 1000
+  Bounding boxes: 1769
+  Overall average boxes per image: 1.77

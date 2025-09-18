@@ -1,0 +1,15 @@
+# CrowdHuman Lightweight Dataset Configuration
+path: C:\Users\sanke\OneDrive\Documents\EDI\Project\Project\ml\crowdhuman_light_dataset
+train: train/images
+val: val/images
+
+# Classes
+names:
+  0: person
+
+# Number of classes
+nc: 1
+
+# Dataset info
+dataset_name: crowdhuman_light
+description: Lightweight CrowdHuman dataset for CPU-only multi-person detection

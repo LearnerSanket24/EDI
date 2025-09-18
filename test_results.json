@@ -1,0 +1,175 @@
+{
+  "system_status": {
+    "success": true,
+    "data": {
+      "capabilities": {
+        "body_visibility_detection": true,
+        "head_pose_detection": true,
+        "multi_person_detection": true,
+        "unified_inference": true
+      },
+      "models": {
+        "head_pose_legacy": {
+          "classes": [
+            "forward",
+            "left",
+            "right",
+            "down",
+            "up"
+          ],
+          "img_size": 160,
+          "last_error": "model file not found at C:\\Users\\sanke\\OneDrive\\Documents\\EDI\\Project\\Project\\backend\\models\\head_pose_mnv2.pt",
+          "loaded": false,
+          "model_path": "C:\\Users\\sanke\\OneDrive\\Documents\\EDI\\Project\\Project\\backend\\models\\head_pose_mnv2.pt"
+        },
+        "unified_detection": {
+          "body_visibility": {
+            "available": true,
+            "model_type": "Custom"
+          },
+          "head_pose": {
+            "available": true,
+            "model_type": "MobileNetV2"
+          },
+          "multi_person": {
+            "currently_using": "fallback",
+            "custom_model_loaded": false,
+            "fallback_model_loaded": true,
+            "last_error": "[Errno 2] No such file or directory: 'models\\\\crowdhuman_custom.pt'"
+          },
+          "unified_system": {
+            "ready": true,
+            "version": "1.0.0"
+          }
+        }
+      },
+      "system": {
+        "models_loaded": 3,
+        "status": "operational",
+        "timestamp": "2025-09-17T23:00:08.546993",
+        "version": "2.0.0"
+      }
+    }
+  },
+  "individual_tests": {
+    "multi-person detection": {
+      "success": true,
+      "data": {
+        "confidence": 0.0,
+        "debug_info": {
+          "confidence_threshold": 0.4,
+          "filtered_detections": 0,
+          "image_shape": [
+            100,
+            100,
+            3
+          ],
+          "raw_detections": 0
+        },
+        "model_type": "CrowdHuman Custom",
+        "num_people": 0,
+        "people_locations": [],
+        "user_id": "test_user_multi-person detection",
+        "violation": false
+      },
+      "processing_time": 2.09775710105896
+    },
+    "head pose detection": {
+      "success": true,
+      "data": {
+        "confidence": 0.0,
+        "pose": "unknown",
+        "user_id": "test_user_head pose detection",
+        "using_mediapipe": false,
+        "violation": false
+      },
+      "processing_time": 2.0746123790740967
+    },
+    "body visibility detection": {
+      "success": true,
+      "data": {
+        "confidence": 0.8,
+        "faces_detected": 0,
+        "mean_brightness": 0.0,
+        "method": "simple_no_content",
+        "upper_body_visible": false,
+        "user_id": "test_user_body visibility detection",
+        "violation": true
+      },
+      "processing_time": 2.099632978439331
+    }
+  },
+  "unified_tests": {
+    "comprehensive": {
+      "success": true,
+      "data": {
+        "detections": {
+          "body_visibility": {
+            "confidence": 0.8,
+            "faces_detected": 0,
+            "mean_brightness": 0.0,
+            "method": "simple_no_content",
+            "upper_body_visible": false,
+            "violation": true
+          },
+          "head_pose": {
+            "confidence": 0.0,
+            "pose": "unknown",
+            "using_mediapipe": false,
+            "violation": false
+          },
+          "multi_person": {
+            "confidence": 0.0,
+            "debug_info": {
+              "confidence_threshold": 0.4,
+              "filtered_detections": 0,
+              "model_used": "YOLOv8n Fallback",
+              "raw_detections": 0
+            },
+            "model_type": "YOLOv8n Fallback",
+            "num_people": 0,
+            "people_locations": [],
+            "using_custom": false,
+            "violation": false
+          }
+        },
+        "image_processed": true,
+        "summary": {
+          "body_visible": false,
+          "head_direction": "unknown",
+          "models_used": {
+            "body_visibility": "unknown",
+            "head_pose": "unknown",
+            "multi_person": "YOLOv8n Fallback"
+          },
+          "overall_violation": true,
+          "total_people": 0
+        },
+        "timestamp": "2025-09-17T23:00:16.879413",
+        "user_id": "test_unified_comprehensive",
+        "violations": {
+          "details": {
+            "body_visibility": {
+              "confidence": 0.8,
+              "issue": "unknown"
+            }
+          },
+          "has_violations": true,
+          "total_violations": 1,
+          "violation_types": [
+            "body_visibility"
+          ]
+        }
+      },
+      "processing_time": 2.271256923675537
+    }
+  },
+  "performance_metrics": {
+    "system_health": "operational",
+    "models_loaded": 3,
+    "average_processing_time": 2.135814845561981,
+    "success_rate": 100.0,
+    "custom_model_active": false
+  },
+  "timestamp": "2025-09-17T23:00:06.492654"
+}

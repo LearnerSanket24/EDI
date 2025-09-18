@@ -1,0 +1,20 @@
+{
+  "system_status": {
+    "success": false,
+    "error": "HTTPConnectionPool(host='localhost', port=5000): Read timed out. (read timeout=30)"
+  },
+  "individual_tests": {
+    "error": "No test images available"
+  },
+  "unified_tests": {
+    "error": "No test images available"
+  },
+  "performance_metrics": {
+    "system_health": "unknown",
+    "models_loaded": 0,
+    "average_processing_time": 0,
+    "success_rate": 0,
+    "custom_model_active": false
+  },
+  "timestamp": "2025-09-18T00:05:17.144085"
+}
